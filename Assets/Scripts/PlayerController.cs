@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private Animator anim;
     private float inputHorizontal;
     private float inputVertical;
     private Rigidbody rb;
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        TryGetComponent(out anim);
         TryGetComponent(out rb);
  
     }
@@ -32,8 +34,13 @@ public class PlayerController : MonoBehaviour
 
         if (moveForward!= Vector3.zero)
         {
+            anim.SetBool("walk", true);
             transform.rotation = Quaternion.LookRotation(moveForward);
         }
+        else{
+            anim.SetBool("walk", false);
+        }
+
     }
 
 }

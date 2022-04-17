@@ -5,9 +5,9 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [Header("player")]
-    public Transform target;
+    public GameObject targetObj;
 
-    private Vector3 offset;
+    private Vector3 targetPos;
 
     [SerializeField]
     private float cameraRotateSpeed = 200f;
@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        offset = transform.position - target.position;
+        targetPos = targetObj.transform.position;
         miniLimit = 360 - maxLimit;
         
     }
@@ -28,11 +28,13 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target != null)
+        if (targetObj != null)
         {
-            transform.position = target.position + offset;
+            transform.position += targetObj.transform.position - targetPos;
+
+            targetPos = targetObj.transform.position;
         }
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(0))
         {
             RotateCamera();
         }
@@ -41,9 +43,8 @@ public class CameraController : MonoBehaviour
     {
         float x = Input.GetAxis("Mouse X");
         float z = Input.GetAxis("Mouse Y");
-        Vector3 pos = target.position;
 
-        transform.RotateAround(pos, Vector3.up, x * Time.deltaTime * cameraRotateSpeed);
+        transform.RotateAround(targetObj.transform.position, Vector3.up, x * Time.deltaTime * cameraRotateSpeed);
 
         var localAngle = transform.localEulerAngles;
 
