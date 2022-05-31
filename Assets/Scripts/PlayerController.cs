@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     private Animator anim;
@@ -34,13 +34,23 @@ public class PlayerController : MonoBehaviour
 
         if (moveForward!= Vector3.zero)
         {
-            anim.SetBool("walk", true);
+            anim.SetFloat("Speed", 1);
             transform.rotation = Quaternion.LookRotation(moveForward);
         }
         else{
-            anim.SetBool("walk", false);
+            anim.SetFloat("Speed", 0);
         }
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        //Debug.Log("触った");
+        if(other.gameObject.TryGetComponent(out enterdungeon enterdungeon)) {
+            SceneManager.LoadScene(enterdungeon.dungeonname.ToString());
+
+
+        }
+
+    }
 }
