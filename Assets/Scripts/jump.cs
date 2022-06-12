@@ -37,7 +37,7 @@ public class jump : MonoBehaviour
             groundLayer);
         if (Input.GetButtonDown("Jump") && isGround)
         {
-            anim.SetTrigger("jump");
+            anim.SetTrigger("Jump");
             isGround = false;
             rb.AddForce(Vector3.up * jumpPower);
         }
