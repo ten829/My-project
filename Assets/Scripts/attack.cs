@@ -19,7 +19,7 @@ public class attack : MonoBehaviour
 
     private void Attack()
     {
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !anim.IsInTransition(0))
         {
             anim.SetTrigger("attack");
         }
