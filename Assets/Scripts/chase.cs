@@ -9,7 +9,7 @@ public class chase : MonoBehaviour
     private GameObject lookTarget;
     [SerializeField]
     private float movespeed;
-
+    private Animator anim;
     private NavMeshAgent agent;
 
     public void SetUpEemy()
@@ -25,6 +25,7 @@ public class chase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        TryGetComponent(out anim);
         SetUpEemy();
         
     }
@@ -44,6 +45,7 @@ public class chase : MonoBehaviour
         if  (lookTarget != null && agent != null)
         {
             agent.destination = lookTarget.transform.position;
+            anim.SetFloat("Speed",1.0f);
         }
         
     }
