@@ -9,6 +9,9 @@ public class boxgeneration : MonoBehaviour
     [SerializeField] GameObject boxprefab;
     changematerial changematerial;
     bool isboxgenerate = true;
+    [SerializeField] private float waitTime = 1.0f;
+    [SerializeField] private UImanager UImanager;
+    int waittimer = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,18 +21,24 @@ public class boxgeneration : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isboxgenerate == false && waittimer != 0)
+        {
+            UImanager.shakebox();
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.C) && isboxgenerate == true)
         {
             createbox();
  
         }
-        if (Input.GetKey(KeyCode.C) && isboxgenerate == true)
+        if (Input.GetKey(KeyCode.C))
         {
             //this.GetComponent<PlayerController>().enabled = false;
             Addtimer();
         }
         if (Input.GetKeyUp(KeyCode.C))
         {
+            timer = 0f;
             //this.GetComponent<PlayerController>().enabled = true;
         }
 
@@ -39,12 +48,7 @@ public class boxgeneration : MonoBehaviour
     public void Addtimer()
     {
         timer += Time.deltaTime;
-        if (timer >= 5f )
-        {
-            //timer = 0f;
-            createbox();
-             
-        }
+        
     }
 
     public void createbox()
@@ -55,12 +59,13 @@ public class boxgeneration : MonoBehaviour
     }
     public IEnumerator Sizeup(GameObject box)
     {
+        waittimer = (int)waitTime;
         bool isset = Input.GetKey(KeyCode.C);
         while (timer <= 5f && isset == true)
         {
             isset = Input.GetKey(KeyCode.C);
             Debug.Log("while");
-            if(timer < 1f)
+            if (timer < 1f)
             {
 
             }
@@ -70,19 +75,30 @@ public class boxgeneration : MonoBehaviour
             }
             else if (2f < timer)
             {
-                
+
                 box.transform.localScale = Vector3.one * 2f;
                 //this.GetComponent<PlayerController>().enabled = true;
-                
-             
+            }
+            if (timer > 5.0f)
+            {
+                isset = false;
             }
             yield return null;
         
         }
         isboxgenerate = false;
         changematerial.changeblockcolor(box);
-        timer = 0f;
-        yield return new WaitForSeconds(5f);
+        //waittimer = (int)waitTime;
+        UImanager.setup(waittimer);
+        while (waittimer > 0)
+        {
+            yield return new WaitForSeconds(1.0f);
+            waittimer--;
+            UImanager.displaywaittime(waittimer);
+        }
+        UImanager.inactivewaittime();
+        //timer = 0f;
+        //yield return new WaitForSeconds(waitTime);
         isboxgenerate = true;
         
     }
