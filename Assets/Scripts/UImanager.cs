@@ -7,6 +7,7 @@ public class UImanager : MonoBehaviour
 {
     [SerializeField] private Text waittimetext;
     private int beforetime;
+    [SerializeField] private Ease ease;
     
     // Start is called before the first frame update
     void Start()
@@ -36,7 +37,7 @@ public class UImanager : MonoBehaviour
     }
     public void shakebox()
     {
-        waittimetext.transform.parent.gameObject.transform.DOShakeScale(0.25f).SetEase(Ease.InOutBack);
+        waittimetext.transform.parent.gameObject.transform.DOShakeScale(0.25f).SetEase(ease);
     }
 
 }

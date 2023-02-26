@@ -6,11 +6,13 @@ public class boxgeneration : MonoBehaviour
 {
     public float timer;
     [SerializeField] GameObject spowner;
+    [SerializeField] GameObject airspowner;
     [SerializeField] GameObject boxprefab;
     changematerial changematerial;
     bool isboxgenerate = true;
     [SerializeField] private float waitTime = 1.0f;
     [SerializeField] private UImanager UImanager;
+    [SerializeField] private jump jump;
     int waittimer = 0;
     // Start is called before the first frame update
     void Start()
@@ -21,10 +23,10 @@ public class boxgeneration : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isboxgenerate == false && waittimer != 0)
+        if (Input.GetKeyDown(KeyCode.C) && waittimer != 0)
         {
             UImanager.shakebox();
-            return;
+            
         }
         if (Input.GetKeyDown(KeyCode.C) && isboxgenerate == true)
         {
@@ -53,13 +55,27 @@ public class boxgeneration : MonoBehaviour
 
     public void createbox()
     {
-        //isboxgenerate = false;
-        GameObject box = Instantiate(boxprefab, spowner.transform.position, Quaternion.identity);
+        GameObject box = null;
+        if (jump.isGround == true)
+        {
+            //isboxgenerate = false;
+            box = Instantiate(boxprefab, spowner.transform.position, Quaternion.identity);
+            box.transform.SetParent(spowner.transform);
+            
+        }
+        else
+        {
+            box = Instantiate(boxprefab, airspowner.transform.position, Quaternion.identity);
+            box.transform.SetParent(airspowner.transform);
+        }
+
         StartCoroutine(Sizeup(box));
+
+
     }
     public IEnumerator Sizeup(GameObject box)
     {
-        waittimer = (int)waitTime;
+        
         bool isset = Input.GetKey(KeyCode.C);
         while (timer <= 5f && isset == true)
         {
@@ -86,9 +102,12 @@ public class boxgeneration : MonoBehaviour
             yield return null;
         
         }
+
         isboxgenerate = false;
         changematerial.changeblockcolor(box);
-        //waittimer = (int)waitTime;
+        box.transform.SetParent(null);
+
+        waittimer = (int)waitTime;
         UImanager.setup(waittimer);
         while (waittimer > 0)
         {
