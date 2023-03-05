@@ -7,6 +7,9 @@ public class attack : MonoBehaviour
     [SerializeField] BoxCollider BoxCollider;
     private Animator anim;
     public bool Isattackbottun;
+    [SerializeField] attackcollision attackcollisionprefab;
+    [SerializeField] Transform attackcollisiontra;
+    [SerializeField] float forcepower;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,10 +41,16 @@ public class attack : MonoBehaviour
     {
         Debug.Log("collideron");
         BoxCollider.enabled = true;
+        //ここでattackcollision生成
+        attackcollision attackcollision = Instantiate(attackcollisionprefab, attackcollisiontra.position, Quaternion.identity);
+        attackcollision.setup(forcepower);
+        Destroy(attackcollision.gameObject,0.5f);
+
     }
     public void collideroff()
     {
         Debug.Log("collideroff");
         BoxCollider.enabled = false;
+
     }
 }

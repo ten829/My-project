@@ -13,6 +13,8 @@ public class boxgeneration : MonoBehaviour
     [SerializeField] private float waitTime = 1.0f;
     [SerializeField] private UImanager UImanager;
     [SerializeField] private jump jump;
+    [SerializeField] private int maxgeneratecount;
+    [SerializeField] private List<GameObject> boxlist = new List<GameObject>();
     int waittimer = 0;
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,10 @@ public class boxgeneration : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if (boxlist.Count >= maxgeneratecount)
+        //{
+           // return;
+        //}
         if (Input.GetKeyDown(KeyCode.C) && waittimer != 0)
         {
             UImanager.shakebox();
@@ -67,6 +73,19 @@ public class boxgeneration : MonoBehaviour
         {
             box = Instantiate(boxprefab, airspowner.transform.position, Quaternion.identity);
             box.transform.SetParent(airspowner.transform);
+        }
+        
+        if(boxlist.Count >= maxgeneratecount)
+        {
+            Destroy(boxlist[0]);
+            boxlist.Remove(boxlist[0]);
+
+            boxlist.Add(box);
+
+        }
+        else
+        {
+            boxlist.Add(box);
         }
 
         StartCoroutine(Sizeup(box));
