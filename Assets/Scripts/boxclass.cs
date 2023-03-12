@@ -8,6 +8,7 @@ public class boxclass : MonoBehaviour
     {
         Debug.Log("アクセス済");
         gameObject.AddComponent<Rigidbody>();
+        
     }
     // Start is called before the first frame update
     void Start()

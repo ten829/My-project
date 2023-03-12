@@ -5,14 +5,17 @@ using UnityEngine.UI;
 using DG.Tweening;
 public class UImanager : MonoBehaviour
 {
+    [SerializeField] private Button buttonblock;
     [SerializeField] private Text waittimetext;
     private int beforetime;
     [SerializeField] private Ease ease;
+    [SerializeField] blockrazer blockrazer;
     
     // Start is called before the first frame update
     void Start()
     {
         inactivewaittime();
+        buttonblock.onClick.AddListener(Onclickblockbutton);
     }
 
     // Update is called once per frame
@@ -38,6 +41,12 @@ public class UImanager : MonoBehaviour
     public void shakebox()
     {
         waittimetext.transform.parent.gameObject.transform.DOShakeScale(0.25f).SetEase(ease);
+    }
+
+    private void Onclickblockbutton()
+    {
+        Debug.Log("button");
+        blockrazer.switchray();
     }
 
 }

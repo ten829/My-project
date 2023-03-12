@@ -20,12 +20,13 @@ public class findbox : MonoBehaviour
         {
             generateray();
         }
+       
         
     }
     private void generateray()
     {
         Ray ray = new Ray(rayposition.transform.position, rayposition.transform.forward);
-        Debug.DrawRay(ray.origin, ray.direction * raydistance, Color.blue, 1.0f);
+        //Debug.DrawRay(ray.origin, ray.direction * raydistance, Color.blue, 1.0f);
         if (Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, raydistance))
         {
             if(hit.collider.TryGetComponent(out boxclass boxclass))

@@ -25,8 +25,12 @@ public class attackcollision : MonoBehaviour
     {
         if(other.TryGetComponent(out Rigidbody rb))
         {
+            
             Vector3 Direction = other.transform.position - this.transform.position;
-            rb.AddForce(Direction * forcepower);
+           
+           
+                rb.AddForce(Direction * forcepower);
+            
         }
     }
 }
