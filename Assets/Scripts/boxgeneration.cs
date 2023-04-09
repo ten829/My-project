@@ -29,22 +29,22 @@ public class boxgeneration : MonoBehaviour
         //{
            // return;
         //}
-        if (Input.GetKeyDown(KeyCode.C) && waittimer != 0)
+        if (Input.GetButtonDown("Fire2") && waittimer != 0)
         {
             UImanager.shakebox();
             
         }
-        if (Input.GetKeyDown(KeyCode.C) && isboxgenerate == true)
+        if (Input.GetButtonDown("Fire2") && isboxgenerate == true)
         {
             createbox();
  
         }
-        if (Input.GetKey(KeyCode.C))
+        if (Input.GetButton("Fire2"))
         {
             //this.GetComponent<PlayerController>().enabled = false;
             Addtimer();
         }
-        if (Input.GetKeyUp(KeyCode.C))
+        if (Input.GetButtonUp("Fire2"))
         {
             timer = 0f;
             //this.GetComponent<PlayerController>().enabled = true;
@@ -95,10 +95,10 @@ public class boxgeneration : MonoBehaviour
     public IEnumerator Sizeup(GameObject box)
     {
         
-        bool isset = Input.GetKey(KeyCode.C);
+        bool isset = Input.GetButton("Fire2");
         while (timer <= 5f && isset == true)
         {
-            isset = Input.GetKey(KeyCode.C);
+            isset = Input.GetButton("Fire2");
             Debug.Log("while");
             if (timer < 1f)
             {

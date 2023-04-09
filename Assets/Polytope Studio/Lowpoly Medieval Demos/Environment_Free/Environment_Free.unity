@@ -1100,7 +1100,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isblockrayon: 0
-  raydistance: 100
+  raydistance: 10
+  rayposition: {fileID: 380966491}
+  boxclass: {fileID: 0}
+--- !u!114 &408516582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408516568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6225b6086e2c428cb1751867608500c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &457827915
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,7 +2023,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100348, guid: 6788413dff62c534d8ca610faef3c7a2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400348, guid: 6788413dff62c534d8ca610faef3c7a2, type: 3}
       propertyPath: m_RootOrder
@@ -2078,7 +2092,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100348, guid: 6788413dff62c534d8ca610faef3c7a2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400348, guid: 6788413dff62c534d8ca610faef3c7a2, type: 3}
       propertyPath: m_RootOrder

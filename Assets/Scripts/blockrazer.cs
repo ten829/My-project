@@ -33,6 +33,7 @@ public class blockrazer : MonoBehaviour
         {
             Debug.Log("box見つけた");
             switchray();
+            boxclass.boxaccess();
 
         }
     }

@@ -28,7 +28,7 @@ public class attack : MonoBehaviour
         {
             return ;
         }
-        if (Input.GetButtonDown("Fire1") || Input.GetKey(KeyCode.B) && !anim.IsInTransition(0))
+        if (Input.GetButtonDown("Fire1") || Input.GetKey(KeyCode.A) && !anim.IsInTransition(0))
         {
             Attackanim();
         }

@@ -34,15 +34,15 @@ public class CameraController : MonoBehaviour
 
             targetPos = targetObj.transform.position;
         }
-        if (Input.GetMouseButton(0))
-        {
+        //if (Input.GetMouseButton(0))
+        //{
             RotateCamera();
-        }
+        //}
     }
     private void RotateCamera()
     {
-        float x = Input.GetAxis("Mouse X");
-        float z = Input.GetAxis("Mouse Y");
+        float x = Input.GetAxis("Axis 7");
+        float z = Input.GetAxis("Axis 8");
 
         transform.RotateAround(targetObj.transform.position, Vector3.up, x * Time.deltaTime * cameraRotateSpeed);
 
